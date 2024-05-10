@@ -1,0 +1,59 @@
+{
+  "name": "lmhot",
+  "version": "0.0.4",
+  "description": "一个简单的热启动",
+  "type": "module",
+  "main": "out/cjs.js",
+  "module": "out/es.js",
+  "typings": "types/index.d.ts",
+  "scripts": {
+    "build": "npm run clear && rollup --config  rollup.config.js    && tsc -p  tsconfig.types.json",
+    "clear": "rm -rf  out  types"
+  },
+  "files": [
+    "bin",
+    "out",
+    "types"
+  ],
+  "engines": {
+    "node": "^18.0.0 ||  >=20.0.0"
+  },
+  "author": "lmssee",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmssee/lmhot.git"
+  },
+  "keywords": [
+    "lmssee",
+    "lmssee-simple-hot",
+    "lmhot"
+  ],
+  "homepage": "https://lmssee.github.io/lmhot",
+  "bugs": {
+    "url": "https://github.com/lmssee/lmhot/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@lmssee/tools": "^0.0.9",
+    "@lmssee/node-tools": "^0.0.3",
+    "@types/node": "~20.12.11",
+    "tslib": "~2.6.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20.12.10",
+    "rollup-plugin-cleanup": "^3.2.1"
+  },
+  "bin": {
+    "lmhot": "./bin/lmhot.js"
+  }
+}
