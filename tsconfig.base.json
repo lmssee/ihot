@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".", 
+      "jsx": "preserve",
+      "strict": true,
+      "target": "ESNext",
+      "module": "ESNext",
+      "skipLibCheck": true,
+      "esModuleInterop": true,
+      "moduleResolution": "Node",
+      "lib": ["ESNext","DOM"],
+      "sourceMap": false
+    },
+  }
+  
