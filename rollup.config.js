@@ -5,33 +5,43 @@ import json from "@rollup/plugin-json";
 import terser from "@rollup/plugin-terser";
 import cleanup from "rollup-plugin-cleanup";
 
+const temporaryArr = ["node:", "tslib", "@lmssee", "lmcmd", "typescript"];
+
 export default {
   input: "./index.ts",
-  output: [
-    {
-      format: "es",
-      entryFileNames: "es.js",
-      preserveModules: false,
-      sourcemap: false,
-      exports: "named",
-      dir: "out",
-    },
-    {
-      format: "cjs",
-      entryFileNames: "cjs.js",
-      preserveModules: false,
-      sourcemap: false,
-      exports: "named",
-      dir: "out",
-    },
-  ],
+  output: {
+    format: "es",
+    entryFileNames: "[name].mjs",
+    preserveModules: true,
+    sourcemap: false,
+    exports: "named",
+    dir: "out",
+  },
+  // output: [
+  //   {
+  //     format: "es",
+  //     entryFileNames: "[name].mjs",
+  //     preserveModules: true,
+  //     sourcemap: false,
+  //     exports: "named",
+  //     dir: "out",
+  //   },
+  //   {
+  //     format: "cjs",
+  //     entryFileNames: "[name].cjs",
+  //     preserveModules: true,
+  //     sourcemap: false,
+  //     exports: "named",
+  //     dir: "out",
+  //   },
+  // ],
   // 配置需要排除的包
-  external: (id) => /^(node:)|(tslib)|(@lmssee)/.test(id),
+  external: (id) => new RegExp("^".concat(temporaryArr.join("|^"))).test(id),
   plugins: [
     resolve(),
     commonjs(),
     // 打包压缩，自动去注释
-    terser(),
+    // terser(),
     // 可打包 json 内容
     json(),
     typescript({}),

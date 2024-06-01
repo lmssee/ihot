@@ -1,6 +1,4 @@
-node_modules/*
-
-*/node_modules
+node_modules
 
 ## 打包文件
 cjs

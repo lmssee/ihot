@@ -1,3 +1,3 @@
 #! /usr/bin/env node
 
-import "../out/es.js";
+import "../out/index.mjs";

@@ -1,14 +1,17 @@
 {
   "name": "lmhot",
-  "version": "0.0.4",
-  "description": "一个简单的热启动",
+  "version": "0.0.21",
+  "description": "a simple hot restart",
   "type": "module",
-  "main": "out/cjs.js",
-  "module": "out/es.js",
+  "main": "out/index.cjs",
+  "module": "out/index.mjs",
   "typings": "types/index.d.ts",
   "scripts": {
-    "build": "npm run clear && rollup --config  rollup.config.js    && tsc -p  tsconfig.types.json",
-    "clear": "rm -rf  out  types"
+    "build": "npm run clear && npm run onlyBuild",
+    "onlyBuild": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
+    "clear": "npx lmcmd  r out types",
+    "clean": "npx lmcmd u -d && npx lmcmd r node_modules  package-lock.json && npm install && npm run build ",
+    "up": "npx lmcmd u -n"
   },
   "files": [
     "bin",
@@ -18,7 +21,7 @@
   "engines": {
     "node": "^18.0.0 ||  >=20.0.0"
   },
-  "author": "lmssee",
+  "author": "lmssee <lmssee@outlook.com>  (https://lmssee.com)",
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -31,27 +34,28 @@
   ],
   "homepage": "https://lmssee.github.io/lmhot",
   "bugs": {
-    "url": "https://github.com/lmssee/lmhot/issues"
+    "url": "https://github.com/lmssee/lmhot/issues",
+    "email": "lmssee@outlook.com"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@lmssee/tools": "^0.0.9",
-    "@lmssee/node-tools": "^0.0.3",
-    "@types/node": "~20.12.11",
-    "tslib": "~2.6.2"
+    "@lmssee/node-tools": "^0.0.17",
+    "@lmssee/tools": "^0.0.14",
+    "lmcmd": "^0.0.36",
+    "tslib": "^2.6.2"
   },
   "devDependencies": {
-    "typescript": "^5.4.5",
-    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-commonjs": "^25.0.8",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
-    "@types/node": "^20.12.10",
-    "rollup-plugin-cleanup": "^3.2.1"
+    "@types/node": "^20.13.0",
+    "rollup-plugin-cleanup": "^3.2.1",
+    "typescript": "^5.4.5"
   },
   "bin": {
     "lmhot": "./bin/lmhot.js"
