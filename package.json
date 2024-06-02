@@ -11,7 +11,7 @@
     "onlyBuild": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
     "clear": "npx lmcmd  r out types",
     "clean": "npx lmcmd u -d && npx lmcmd r node_modules  package-lock.json && npm install && npm run build ",
-    "dev": "npm run build && node  ./bin/lmhot.js",
+    "dev": "npm run build && node  ./bin/lmhot.js -v",
     "up": "npx lmcmd u -n"
   },
   "files": [
@@ -43,9 +43,9 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@lmssee/node-tools": "^0.0.17",
+    "@lmssee/node-tools": "^0.0.19",
     "@lmssee/tools": "^0.0.14",
-    "lmcmd": "^0.0.36",
+    "lmcmd": "^0.0.38",
     "tslib": "^2.6.2"
   },
   "devDependencies": {
