@@ -1,0 +1,67 @@
+{
+  "name": "ihot",
+  "type": "module",
+  "version": "0.0.0",
+  "main": "exportCjs/index.cjs",
+  "module": "exportMjs/index.mjs",
+  "typings": "exportTypes/index.d.ts",
+  "description": "a simple hot restart",
+  "scripts": {
+    "build": "npx ixxx rm  exportCjs exportMjs exportTypes && npm run b",
+    "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
+    "clean": "npx ixxx pkg -u rm node_modules run npm install run build ",
+    "test": "npx ixxx run build  && echo 'start ihot' && ihot",
+    "up": "npx ixxx up -n"
+  },
+  "files": [
+    "exportBin",
+    "exportCjs",
+    "exportMjs",
+    "exportTypes"
+  ],
+  "engines": {
+    "node": "^18.0.0 ||  >=20.0.0"
+  },
+  "author": "lmssee <lmssee@outlook.com>  (https://lmssee.com)",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmssee/ihot.git"
+  },
+  "keywords": [
+    "letmiseesee",
+    "lmssee",
+    "is-mi",
+    "ismi",
+    "hot",
+    "ihot"
+  ],
+  "homepage": "https://lmssee.github.io/ihot",
+  "bugs": {
+    "url": "https://github.com/lmssee/ihot/issues",
+    "email": "lmssee@outlook.com"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "ismi-command": "^0.0.5",
+    "ismi-js-tools": "^0.0.2",
+    "ismi-node-tools": "^0.0.3",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20.13.0",
+    "rollup-plugin-cleanup": "^3.2.1",
+    "typescript": "^5.4.5"
+  },
+  "bin": {
+    "ihot": "./exportBin/index.js"
+  }
+}

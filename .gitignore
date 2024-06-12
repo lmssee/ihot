@@ -1,0 +1,12 @@
+node_modules
+
+## 打包文件
+# exportCjs
+exportMjs
+exportTypes
+
+## 测试相关
+
+test/out
+
+package-lock.json
