@@ -1,21 +1,21 @@
-# @lmssee/hot
+# ihot
 
-A simple hot start (abbreviated as `lmhot`). Simple, it's because only do one thing, listen for file changes, and restart the execution command
+A simple hot start (abbreviated as `ihot`). Simple, it's because only do one thing, listen for file changes, and restart the execution command
 
 <table><tr>
-<td><a href="https://github.com/lmssee/lmhot/blob/main/ReadMe.md"  target="_self">English</a></td>
-<td><a href="https://github.com/lmssee/lmhot/blob/main/自述文件.md"  target="_self">中文</a></td>
+<td><a href="https://github.com/lmssee/ihot/blob/main/README.md"  target="_self">English</a></td>
+<td><a href="https://github.com/lmssee/ihot/blob/main/自述文件.md"  target="_self">中文</a></td>
 </tr></table>
 
 ## use
 
 ```sh
-npx  lmhot
+npx  ihot
 ```
 
 ## Using configuration files
 
-Can configure files such as' lmconfig.json ',' lmconfig.ts', and 'lmconfig.js' to configure hot values for heating updates
+Can configure files such as' miconfig.json ',' miconfig.ts', and 'miconfig.js' to configure hot values for heating updates
 
 If both configurations exist, the final configuration will be '.json'. If there is no '.json' file, the final configuration will be '.js' file
 
@@ -25,13 +25,13 @@ Create a configuration file using the `init` command
 
 ```sh
 
-npx lmhot init # Independently selecting configuration files
-npx lmhot init JSON # Use JSON to configure format files
-npx lmhot i -n # Use JSON to configure format files
-npx lmhot init js # Use js to configure format files
-npx lmhot i -j # Use JavaScript to configure format files
-npx lmhot init ts # Use ts to configure format files
-npx lmhot i -t # Use ts configuration format file
+npx ihot init # Independently selecting configuration files
+npx ihot init JSON # Use JSON to configure format files
+npx ihot i -n # Use JSON to configure format files
+npx ihot init js # Use js to configure format files
+npx ihot i -j # Use JavaScript to configure format files
+npx ihot init ts # Use ts to configure format files
+npx ihot i -t # Use ts configuration format file
 ```
 
 _You can use - h to view specific usage and their abbreviations_
@@ -42,16 +42,16 @@ _You can use - h to view specific usage and their abbreviations_
 {
   "hot": {
     /***  base */
-    "base": "",
+    "base": "..",
     /**  cwd   */
-    "cwd": "",
+    // "cwd": "",
     /**  Hot start-up listening files */
-    "watch": "tools",
+    "watch": "ihot",
     /**
      * Default not listening to   *\/lib, *\/cjs, and *\/es
      * packaged content,can be changed according to actual situation
      */
-    "skip": ["lib", "es", "cjs"],
+    "skip": ["exportCjs", "exportMjs", "exportTypes"],
     /**  Command used  */
     "code": "npx lmssee",
     /**
@@ -62,7 +62,7 @@ _You can use - h to view specific usage and their abbreviations_
     "args": ["-al"],
     /** Other commands that need to be executed before executing  */
     "beforeReStart": {
-      "tools": "npm  run build "
+      "ihot": "npm  run build "
     }
   }
 }
@@ -71,27 +71,27 @@ _You can use - h to view specific usage and their abbreviations_
 ### JS format configuration file
 
 ```ts
-/**  请勿在函数体外添加非注释内容  */
-// 配置项 https://github.com/lmssee/lmhot/blob/main/%E8%87%AA%E8%BF%B0%E6%96%87%E4%BB%B6.md#配置说明
+/**  Do not add non commented content outside the function body  */
+// see in  https://github.com/lmssee/ihot/blob/main/%E8%87%AA%E8%BF%B0%E6%96%87%E4%BB%B6.md#配置说明
 () => ({
   //  热启动相关配置
   hot: {
     // 监听文件的相对路径（这里不影响 \`cwd\` 路径， cwd 依旧相对于配置文件目录 ）
-    // "base": ".",
+    base: '..',
     // 监听的文件/夹，但他们内部文件变化，可触发再次启动
-    watch: [".", "src"],
+    watch: ['ihot'],
     // 打包编译文件，不监听以下文件内文件变化
-    skip: ["out", "types"],
+    skip: ['exportCjs', 'exportMjs', 'exportTypes'],
     // 启动 \`code\` 的相对目录，可以为空
     // "cwd": ".",
     // 执行的具体的命令
-    code: "node  ./index.js",
+    code: 'node  ./index.js',
     // 启动时赋予 \`code\` 的参数
-    args: ["-v"],
+    args: ['-v'],
     // 监听变化后，相对目录在再次启动前执行的命令
     // 这个属性应与 \`watch\` 元素相同
     beforeRestart: {
-      src: "npm  run build",
+      ihot: 'npm  run build',
     },
   },
 });
@@ -100,33 +100,33 @@ _You can use - h to view specific usage and their abbreviations_
 ### TS format configuration file
 
 ```ts
-/**  请勿在函数体外添加非注释内容  */
-// 配置项 https://github.com/lmssee/lmhot/blob/main/%E8%87%AA%E8%BF%B0%E6%96%87%E4%BB%B6.md#配置说明
+/**  Do not add non commented content outside the function body  */
+// 配置项 https://github.com/lmssee/ihot/blob/main/%E8%87%AA%E8%BF%B0%E6%96%87%E4%BB%B6.md#配置说明
 () => ({
   //  热启动相关配置
   hot: {
     // 监听文件的相对路径（这里不影响 \`cwd\` 路径， cwd 依旧相对于配置文件目录 ）
     // "base": ".",
     // 监听的文件/夹，但他们内部文件变化，可触发再次启动
-    watch: [".", "src"],
+    watch: ['.', 'src'],
     // 打包编译文件，不监听以下文件内文件变化
-    skip: ["out", "types"],
+    skip: ['out', 'types'],
     // 启动 \`code\` 的相对目录，可以为空
     // "cwd": ".",
     // 执行的具体的命令
-    code: "node  ./index.js",
+    code: 'node  ./index.js',
     // 启动时赋予 \`code\` 的参数
-    args: ["-v"],
+    args: ['-v'],
     // 监听变化后，相对目录在再次启动前执行的命令
     // 这个属性应与 \`watch\` 元素相同
     beforeRestart: {
-      src: "npm  run build",
+      src: 'npm  run build',
     },
   },
 });
 ```
 
-If during startup, except for `npx lmhot` (non global installation) and `lmhot` (global installation), which have parameters after startup, the configuration file will be directly overwritten
+If during startup, except for `npx ihot` (non global installation) and `ihot` (global installation), which have parameters after startup, the configuration file will be directly overwritten
 
 ## Configuration Description
 
@@ -148,4 +148,4 @@ If you want to listen to multiple folders, you can use arrays to modify the defa
 
 `skip` Configure files that ignore listening **If the build file is not included, it may cause an infinite loop: clean ->build ->clean ->build**
 
-If you have any questions, you can directly [submit question](https://github.com/lmssee/lmhot/issues/new)
+If you have any questions, you can directly [submit question](https://github.com/lmssee/ihot/issues/new)

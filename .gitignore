@@ -1,11 +1,10 @@
 node_modules
 
 ## 打包文件
-cjs
-es
-lib
-out
+# exportCjs
+exportMjs
+exportTypes
 
-types
+## 测试相关
 
-package-lock.json
+test/out

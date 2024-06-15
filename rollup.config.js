@@ -1,21 +1,21 @@
-import typescript from "@rollup/plugin-typescript";
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import json from "@rollup/plugin-json";
-import terser from "@rollup/plugin-terser";
-import cleanup from "rollup-plugin-cleanup";
+import typescript from '@rollup/plugin-typescript';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
+import terser from '@rollup/plugin-terser';
+import cleanup from 'rollup-plugin-cleanup';
 
-const temporaryArr = ["node:", "tslib", "@lmssee", "lmcmd", "typescript"];
+const temporaryArr = ['node:', 'tslib', 'ismi-', 'typescript'];
 
 export default {
-  input: "./index.ts",
+  input: './index.ts',
   output: {
-    format: "es",
-    entryFileNames: "[name].mjs",
+    format: 'es',
+    entryFileNames: '[name].mjs',
     preserveModules: true,
     sourcemap: false,
-    exports: "named",
-    dir: "out",
+    exports: 'named',
+    dir: 'exportMjs',
   },
   // output: [
   //   {
@@ -36,7 +36,7 @@ export default {
   //   },
   // ],
   // 配置需要排除的包
-  external: (id) => new RegExp("^".concat(temporaryArr.join("|^"))).test(id),
+  external: id => new RegExp('^'.concat(temporaryArr.join('|^'))).test(id),
   plugins: [
     resolve(),
     commonjs(),

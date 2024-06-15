@@ -1,0 +1,7 @@
+# Ignore artifacts:
+
+exportBin
+exportMjs
+exportCjs
+exportTypes
+test/out

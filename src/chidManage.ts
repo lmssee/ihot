@@ -1,8 +1,7 @@
-import { spawn } from "node:child_process";
-import hotData from "./hotData";
-import { createInterface } from "node:readline/promises";
-import { fileExist, pathJoin } from "@lmssee/node-tools";
-import { Color } from "lmcmd";
+import { spawn } from 'node:child_process';
+import hotData from './hotData';
+import { createInterface } from 'node:readline/promises';
+import { fileExist, Color } from 'ismi-node-tools';
 const { stdin, stdout, stderr } = process;
 
 const rl = createInterface({
@@ -21,7 +20,7 @@ export async function createChild() {
   const cwdExit = fileExist(cwd);
   if (!cwdExit || !cwdExit.isDirectory()) {
     return console.log(
-      Color.darkBlue(`配置中 cwd（目录） :  ${Color.darkYellow(cwd)} 不存在`)
+      Color.darkBlue(`配置中 cwd（目录） :  ${Color.darkYellow(cwd)} 不存在`),
     );
   }
 
@@ -34,9 +33,9 @@ export async function createChild() {
         shell: true,
         cwd,
         stdio: [stdin, stdout, stderr],
-      }
+      },
     );
   } catch (error) {
-    console.log(error, "\n 创建子线程失败");
+    console.log(error, '\n 创建子线程失败');
   }
 }

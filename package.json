@@ -1,23 +1,24 @@
 {
-  "name": "lmhot",
-  "version": "0.0.22",
-  "description": "a simple hot restart",
+  "name": "ihot",
   "type": "module",
-  "main": "out/index.cjs",
-  "module": "out/index.mjs",
-  "typings": "types/index.d.ts",
+  "version": "0.0.1",
+  "main": "exportCjs/index.cjs",
+  "module": "exportMjs/index.mjs",
+  "typings": "exportTypes/index.d.ts",
+  "description": "a simple hot restart",
   "scripts": {
-    "build": "npm run clear && npm run onlyBuild",
-    "onlyBuild": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
-    "clear": "npx lmcmd  r out types",
-    "clean": "npx lmcmd u -d && npx lmcmd r node_modules  package-lock.json && npm install && npm run build ",
-    "dev": "npm run build && node  ./bin/lmhot.js -v",
-    "up": "npx lmcmd u -n"
+    "build": "npx ixxx rm  exportCjs exportMjs exportTypes && npm run b",
+    "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
+    "clean": "npx ixxx pkg -u rm node_modules run npm install run build ",
+    "prettier": "npx prettier . --write",
+    "test": "npx ixxx run build  && echo 'start ihot' && ihot",
+    "up": "npx ixxx up -n"
   },
   "files": [
-    "bin",
-    "out",
-    "types"
+    "exportBin",
+    "exportCjs",
+    "exportMjs",
+    "exportTypes"
   ],
   "engines": {
     "node": "^18.0.0 ||  >=20.0.0"
@@ -26,16 +27,19 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lmssee/lmhot.git"
+    "url": "git+https://github.com/lmssee/ihot.git"
   },
   "keywords": [
+    "letmiseesee",
     "lmssee",
-    "lmssee-simple-hot",
-    "lmhot"
+    "is-mi",
+    "ismi",
+    "hot",
+    "ihot"
   ],
-  "homepage": "https://lmssee.github.io/lmhot",
+  "homepage": "https://lmssee.github.io/ihot",
   "bugs": {
-    "url": "https://github.com/lmssee/lmhot/issues",
+    "url": "https://github.com/lmssee/ihot/issues",
     "email": "lmssee@outlook.com"
   },
   "publishConfig": {
@@ -43,10 +47,10 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@lmssee/node-tools": "^0.0.19",
-    "@lmssee/tools": "^0.0.14",
-    "lmcmd": "^0.0.38",
-    "tslib": "^2.6.2"
+    "ismi-command": "^0.0.7",
+    "ismi-js-tools": "^0.0.2",
+    "ismi-node-tools": "^0.0.6",
+    "tslib": "^2.6.3"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.8",
@@ -54,11 +58,12 @@
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
-    "@types/node": "^20.13.0",
+    "@types/node": "^20.14.2",
+    "prettier": "^3.3.2",
     "rollup-plugin-cleanup": "^3.2.1",
     "typescript": "^5.4.5"
   },
   "bin": {
-    "lmhot": "./bin/lmhot.js"
+    "ihot": "./exportBin/index.js"
   }
 }
