@@ -50,6 +50,7 @@ async function readTsFile() {
 
     if (resultText.length > 0) return getTextOfJsFile(resultText);
   } catch (error) {
+    console.log(error);
     console.log(
       Color.yellow(`  从 'miconfig.ts' 文件读取配置失败`).concat(
         ' \n 请确保您已安装 typescript \n',
@@ -61,21 +62,13 @@ async function readTsFile() {
 
 /** 通过 js 文件获配置 */
 function getTextOfJsFile(str: string) {
-  let _str = str;
-  _str = _str.toString();
-  for (let i = _str.length - 1; i--; ) {
-    console.log(
-      i,
-      _str[i] == '\n' ? '\\n' : _str[i] == '\r' ? '\\r' : str[i],
-      _str[i].codePointAt(0),
-    );
-  }
-
-  _str = _str.replace(/(\/\/.*?\r?\n)/gm, '');
-  _str = _str.replace(/(\/\*+(.*\r?\n)*?.*?\*\/)/gm, '');
-  _str = _str.replace(/\n(\s*\r?\n)+/gm, '\n');
-  _str = _str.replace(/\r?\n/gm, '');
-  _str = _str.replace(/\s{2,}/gm, ' ');
+  let _str = str
+    .toString()
+    .replace(/(\/\/.*?\r?\n)/gm, '')
+    .replace(/(\/\*+(.*\r?\n)*?.*?\*\/)/gm, '')
+    .replace(/\n(\s*\r?\n)+/gm, '\n')
+    .replace(/\r?\n/gm, '')
+    .replace(/\s{2,}/gm, ' ');
   const getFun = new Function('return' + _str)();
   return (typeOf(getFun) == 'function' && getFun().hot) || {};
 }
