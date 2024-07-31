@@ -11,7 +11,7 @@
     "b": "rollup --config rollup.config.js && tsc -p tsconfig.types.json",
     "clean": "npx ixxx pkg -u rm node_modules run npm install run build ",
     "prettier": "npx prettier . --write",
-    "test": "npx ixxx run build  && echo 'start ihot' && ihot",
+    "test": "npm run b  && echo 'start ihot' && npx ihot",
     "up": "npx ixxx up -n"
   },
   "files": [

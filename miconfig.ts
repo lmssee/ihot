@@ -10,11 +10,11 @@
     // 打包编译文件，不监听以下文件内文件变化
     skip: ['exportMjs', 'exportCjs', 'exportTypes'],
     // 启动 `code` 的相对目录，可以为空
-    // "cwd": ".",
+    // cwd: '.',
     // 执行的具体的命令
-    code: 'node  ./index.js',
+    code: 'node test/index.js',
     // 启动时赋予 `code` 的参数
-    args: ['-v'],
+    // args: ['-v'],
     // 监听变化后，相对目录在再次启动前执行的命令
     // 这个属性应与 `watch` 元素相同
     beforeRestart: {

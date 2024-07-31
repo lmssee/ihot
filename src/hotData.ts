@@ -1,3 +1,4 @@
+import { ChildProcess, ChildProcessWithoutNullStreams } from 'child_process';
 import { typeOf } from 'ismi-js-tools';
 import { ChildProcessByStdio } from 'node:child_process';
 import { FSWatcher } from 'node:fs';
@@ -52,7 +53,8 @@ class HotData {
    *
    * 该属性主要操作存在于 [子线程管理文件](./childManage.ts) 中进行操作
    */
-  childProcess?: ChildProcessByStdio<null, null, null>;
+  childProcess!: ChildProcessWithoutNullStreams;
+  childList!: ChildProcessWithoutNullStreams[];
   /** 用户启动时的参数 */
   // args?: string[];
   /** 配置信息
@@ -66,6 +68,15 @@ class HotData {
    * 现设置监听者，在监听者发生变更时触发进行清理与避免已监听文件的重复监听
    */
   listeners: { [key: string]: FSWatcher } = {};
+  /**
+   * 退出的时间
+   *
+   * 用于检测是否为连续点击 Ctrl + C
+   *
+   * 以在下次点击时退出程序
+   *
+   */
+  existTime: number = Date.now();
 
   /** 整理数据  */
   manage() {

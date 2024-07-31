@@ -1,8 +1,9 @@
+import { log } from 'node:console';
 /**
  * 该文件为开发文件，仅在开发环境使用。用于开发的热更新
  */
 import { watch, statSync } from 'node:fs';
-import { t, throttle } from 'ismi-js-tools';
+import { throttle } from 'ismi-js-tools';
 import hotData from './hotData';
 import initOptions from './initOptions';
 import { createChild, killChild } from './chidManage';
@@ -24,7 +25,7 @@ export default class HotDevelop {
      *  监听配置文件的变化
      */
     watch('.', { persistent: false, recursive: true }, this.configChange);
-    /** 初始化参数（起动命令后手动添加的参数） */
+    // 初始化参数（起动命令后手动添加的参数）
     hotData.initArg = args;
   }
 
@@ -33,19 +34,17 @@ export default class HotDevelop {
    * @param [restart=false] {@link Boolean} 类型，用于是否初始化配置项及更新监听
    */
   async run(restart = true) {
-    /** 杀死撒谎给你一次进程，方法内自己会检测是否需要杀死 */
-    killChild();
-    /** 锁定更新  */
+    // 锁定更新
     hotData.restart = true;
     // 初始化配置
     restart && (await initOptions());
+    // 食子虎
+    await killChild();
     // 开始允许代码
     await beforeRestart();
-    /**
-     * 创建子线程
-     */
+    // 创建子线程
     createChild();
-    /** 解锁 */
+    // 解锁
     hotData.restart = false;
     // 开启监听
     restart && this.hot();
@@ -81,11 +80,8 @@ export default class HotDevelop {
               if (checkSkip(filename)) return;
               /// 上一次未结束
               if (hotData.restart)
-                return (
-                  // 由于在 windows 上更改一个文件会触发多次同文件的 change，这里做一个筛选
-                  hotData.changeFileInfo.filename != filename &&
-                  console.log(Color.random('仍在努力。。。'))
-                );
+                // 由于在 windows 上更改一个文件会触发多次同文件的 change，这里做一个筛选
+                return hotData.changeFileInfo.filename != filename;
               // 正常进入
               this.reLodeCode(type, filename, _ele);
             },
@@ -134,11 +130,4 @@ export default class HotDevelop {
 function getTime() {
   const now = new Date();
   return [now.toLocaleTimeString(), now.toLocaleDateString()];
-}
-
-/** todo 做一个加载条 */
-function progress(count: number = 0) {
-  const leftLength = Math.round(count * 30),
-    rightLength = 29 - leftLength;
-  console.log(`{}`);
 }
